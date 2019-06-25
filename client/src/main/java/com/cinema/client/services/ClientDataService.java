@@ -70,7 +70,7 @@ public class ClientDataService implements ClientService {
     }
 
     private void validateClient(String identification) throws ClientAlreadyRegisteredException {
-	if (clientRepository.findClientByIdentificationEquals(identification)) {
+	if (clientRepository.existsClientByIdentificationEquals(identification)) {
 	    throw new ClientAlreadyRegisteredException();
 	}
     }

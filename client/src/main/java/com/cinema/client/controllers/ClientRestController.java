@@ -50,6 +50,7 @@ public class ClientRestController implements ClientController {
     }
 
     @Override
+    @PatchMapping(path = "/{id}")
     public ResponseEntity editClient(Long id, EditClientBody body) throws ClientNotFoundException {
 	final Client client = clientService.editClient(id, body.getFirstName(), body.getLastName());
 	return new ResponseEntity<>(client, HttpStatus.OK);

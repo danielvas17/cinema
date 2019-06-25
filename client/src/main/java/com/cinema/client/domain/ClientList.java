@@ -1,11 +1,13 @@
 package com.cinema.client.domain;
 
 import com.cinema.client.entities.Client;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
 public class ClientList {
 
+    @JsonProperty("clients")
     private List<Client> clientList;
 
     public ClientList() {

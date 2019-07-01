@@ -1,4 +1,4 @@
-package com.cinema.client.aspects;
+package com.cinema.movie.aspects;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Component
 public class ClientEndpointLogger {
 
-    @Before("execution(* com.cinema.client.controllers..*(..))")
+    @Before("execution(* com.cinema.movie.controllers..*(..))")
     public void log(final JoinPoint joinPoint) throws Throwable {
 	HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
 			.currentRequestAttributes())

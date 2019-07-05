@@ -5,5 +5,5 @@ CREATE TABLE movie (
   name VARCHAR(128) NOT NULL,
   duration INT NOT NULL,
   min_age INT NOT NULL,
-  is_published BOOL DEFAULT FALSE
+  is_publish BOOL DEFAULT FALSE
 );

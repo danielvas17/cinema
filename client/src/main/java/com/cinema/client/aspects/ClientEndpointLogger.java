@@ -9,7 +9,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.stream.Collectors;
 
 @Aspect
 @Component
@@ -22,9 +21,8 @@ public class ClientEndpointLogger {
 			.getRequest();
 
 	final String className = joinPoint.getSignature().getDeclaringTypeName();
-	LoggerFactory.getLogger(className).info("{} {} [{}]", request.getMethod(),
-			request.getRequestURI(),
-			request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
+	LoggerFactory.getLogger(className).info("{} {}", request.getMethod(),
+			request.getRequestURI());
     }
 
 }

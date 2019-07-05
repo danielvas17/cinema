@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -73,5 +76,29 @@ public class MovieComponent implements MovieOperations {
 	movie.setPublish(false);
 
 	movieRepository.save(movie);
+    }
+
+    @Override
+    public boolean validate(Movie movie, Date dob) {
+	final boolean validateMovie = validateMovie(movie);
+	final boolean validateAge = validateAge(movie, dob);
+
+	return validateMovie && validateAge;
+    }
+
+    private boolean validateMovie(Movie movie) {
+	return movie.isPublish();
+    }
+
+    private boolean validateAge(Movie movie, Date dob) {
+	final int age = getAge(dob);
+	return age > movie.getMinAge();
+    }
+
+    private int getAge(Date dob) {
+	DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+	int d1 = Integer.parseInt(formatter.format(dob));
+	int d2 = Integer.parseInt(formatter.format(new Date()));
+	return (d2 - d1) / 10000;
     }
 }

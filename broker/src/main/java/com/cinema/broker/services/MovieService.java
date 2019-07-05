@@ -2,6 +2,7 @@ package com.cinema.broker.services;
 
 import com.cinema.broker.domain.MovieList;
 import com.cinema.broker.domain.MovieObject;
+import com.cinema.broker.domain.ValidateMovieBody;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Date;
 import java.util.concurrent.CompletableFuture;
 
 @Service
@@ -31,8 +33,11 @@ public class MovieService {
     }
 
     @Async
-    public CompletableFuture<Boolean> validateMovie(Long id) {
-	final ResponseEntity<MovieObject> movieEntity = this.client.getForEntity("/{id}", MovieObject.class, id);
+    public CompletableFuture<Boolean> validateMovie(Long id, Date dob) {
+	ValidateMovieBody body = new ValidateMovieBody(dob);
+
+	final ResponseEntity<MovieObject> movieEntity = this.client
+			.postForEntity("/{id}/validate-subscription", body, MovieObject.class, id);
 	return CompletableFuture.completedFuture(movieEntity.getStatusCode() == HttpStatus.OK);
     }
 

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,6 +65,12 @@ public class MovieDataService implements MovieService {
 	movieOperations.unpublishMovie(movie);
     }
 
+    @Override
+    public boolean validate(Long id, Date dob) throws MovieNotFoundException, MovieNotPublishException {
+	final Movie movie = movieOperations.getMovie(id);
+	return movieOperations.validate(movie, dob);
+    }
+
     private MovieObject movieToObject(Movie movie) {
 	MovieObject movieObject = new MovieObject();
 	movieObject.setId(movie.getId());
@@ -73,4 +80,5 @@ public class MovieDataService implements MovieService {
 
 	return movieObject;
     }
+
 }

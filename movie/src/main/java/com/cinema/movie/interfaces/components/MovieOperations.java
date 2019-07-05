@@ -5,6 +5,7 @@ import com.cinema.movie.exceptions.MovieAlreadyPublishException;
 import com.cinema.movie.exceptions.MovieNotFoundException;
 import com.cinema.movie.exceptions.MovieNotPublishException;
 
+import java.util.Date;
 import java.util.List;
 
 public interface MovieOperations {
@@ -20,4 +21,6 @@ public interface MovieOperations {
     void publishMovie(Movie movie) throws MovieAlreadyPublishException;
 
     void unpublishMovie(Movie movie) throws MovieNotPublishException;
+
+    boolean validate(Movie movie, Date dob);
 }

@@ -1,5 +1,7 @@
 package com.cinema.client.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -24,6 +26,7 @@ public class Client implements Serializable {
     private String identification;
 
     @Column(name = "date_birth")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dob;
 
     public Client() {

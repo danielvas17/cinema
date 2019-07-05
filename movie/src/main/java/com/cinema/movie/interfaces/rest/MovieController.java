@@ -2,6 +2,7 @@ package com.cinema.movie.interfaces.rest;
 
 import com.cinema.movie.domain.MovieEditBody;
 import com.cinema.movie.domain.MovieRegisterBody;
+import com.cinema.movie.domain.ValidateBody;
 import com.cinema.movie.exceptions.MovieAlreadyPublishException;
 import com.cinema.movie.exceptions.MovieNotFoundException;
 import com.cinema.movie.exceptions.MovieNotPublishException;
@@ -20,5 +21,7 @@ public interface MovieController {
     ResponseEntity editMovie(Long id, MovieEditBody body) throws MovieNotFoundException;
 
     ResponseEntity unpublishMovie(Long id) throws MovieNotFoundException, MovieNotPublishException;
+
+    ResponseEntity validateAge(Long id, ValidateBody dob) throws MovieNotFoundException, MovieNotPublishException;
 
 }

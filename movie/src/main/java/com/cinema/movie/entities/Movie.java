@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 @Entity
 public class Movie implements Serializable {
+
     private static final long serialVersionUID = -7217887244187665849L;
 
     @Id

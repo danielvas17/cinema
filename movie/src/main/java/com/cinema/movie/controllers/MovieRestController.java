@@ -1,9 +1,6 @@
 package com.cinema.movie.controllers;
 
-import com.cinema.movie.domain.MovieEditBody;
-import com.cinema.movie.domain.MovieList;
-import com.cinema.movie.domain.MovieObject;
-import com.cinema.movie.domain.MovieRegisterBody;
+import com.cinema.movie.domain.*;
 import com.cinema.movie.exceptions.MovieAlreadyPublishException;
 import com.cinema.movie.exceptions.MovieNotFoundException;
 import com.cinema.movie.exceptions.MovieNotPublishException;
@@ -70,5 +67,13 @@ public class MovieRestController implements MovieController {
 		    throws MovieNotFoundException, MovieNotPublishException {
 	movieService.unpublishMovie(id);
 	return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    @Override
+    @PostMapping(path = "/{id}/actions/validate")
+    public ResponseEntity validateAge(@PathVariable Long id, @RequestBody ValidateBody body)
+		    throws MovieNotFoundException, MovieNotPublishException {
+	final boolean isValid = movieService.validate(id, body.getDob());
+	return new ResponseEntity(isValid ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 }
